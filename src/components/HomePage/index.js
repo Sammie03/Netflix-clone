@@ -3,7 +3,9 @@ import './style.scss'
 
 const HomePage = () => {
   return (
-    <div>Homepage</div>
+    <div>
+      Homepage
+      </div>
   )
 }
 
