@@ -1,0 +1,121 @@
+@mixin flexRules($justify, $direction, $alignment) {
+    display: flex;
+    justify-content: $justify;
+    flex-direction: $direction;
+    align-items: $alignment;
+}
+
+.navbar-container-bg {
+    background-color: rgb(20, 20, 20);
+    // opacity: 7;
+    // transition: 0.5s ease-in-out;
+}
+
+.navbar-container {
+    @include flexRules(space-between, row, center);
+    height: 50px;
+    padding: 15px 40px;
+    position: fixed;
+    z-index: 100000;
+    width: 100%;
+    // opacity: 7;
+    transition: 0.6s ease-out;
+
+    .logo-navMenu {
+        @include flexRules(space-around, row, center);
+        width: 50%;
+
+        .logo {
+            cursor: pointer;
+        }
+
+        .navMenu {
+            ul li {
+                list-style-type: none;
+                display: inline-block;
+                padding: 12px;
+                cursor: pointer;
+                font-size: 14px;
+                font-weight: 700;
+            }
+        }
+    }
+
+    .search-notif-profile {
+        @include flexRules(flex-start, row, center);
+        width: 22%;
+    }
+
+    .kids-corner {
+        cursor: pointer;
+        margin-left: 20px;
+    }
+
+    .icon-arrow {
+        @include flexRules(flex-start, row, center);
+        cursor: pointer;
+    }
+
+    .ant-input {
+        background: transparent;
+        color: #fff;
+
+        &::placeholder {
+            color: grey;
+            font-size: 14px;
+        }
+    }
+
+    .search-box {
+        border: 1px solid white;
+        background: rgba(0, 0, 0, 0.7);
+        width: 300px;
+
+        &:hover {
+            border: 1px solid white;
+        }
+
+        &:focus {
+            border: 1px solid white;
+        }
+
+    }
+
+
+    .search-notif-profile-space {
+        @include flexRules(flex-start, row, center);
+        width: 41%;
+    }
+
+
+    .profile-icon-container {
+        @include flexRules(center, row, center);
+        border: 1px solid #fff;
+        width: 50px;
+        height: 45px;
+        cursor: pointer;
+        border-radius: 8px;
+        margin-left: 20px;
+    }
+
+    .rotateIconUp {
+        transition: 0.70s;
+        -webkit-transition: 0.70s;
+        -moz-transition: 0.70s;
+        -ms-transition: 0.70s;
+        -o-transition: 0.70s;
+        -webkit-transform: rotate(180deg);
+        -moz-transform: rotate(180deg);
+        -o-transform: rotate(180deg);
+        -ms-transform: rotate(180deg);
+        transform: rotate(180deg);
+    }
+
+    .rotateIconDown {
+        transition: 0.70s;
+        -webkit-transition: 0.70s;
+        -moz-transition: 0.70s;
+        -ms-transition: 0.70s;
+        -o-transition: 0.70s;
+    }
+}

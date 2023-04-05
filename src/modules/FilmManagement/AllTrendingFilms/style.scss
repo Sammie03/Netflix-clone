@@ -1,0 +1,13 @@
+@mixin flexRules($justify, $direction, $alignment) {
+    display: flex;
+    justify-content: $justify;
+    flex-direction: $direction;
+    align-items: $alignment;
+}
+
+.all-trending-films-container {
+    .negative-margin {
+        margin-top: -120px;
+    }
+
+}

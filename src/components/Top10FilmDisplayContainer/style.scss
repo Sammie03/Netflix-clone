@@ -1,0 +1,121 @@
+@mixin flexRules($justify, $direction, $alignment) {
+    display: flex;
+    justify-content: $justify;
+    flex-direction: $direction;
+    align-items: $alignment;
+}
+
+.film-container-positive-margin {
+    margin-top: 50px;
+}
+
+.top10-film-container {
+    width: 100%;
+    height: 100%;
+    margin-left: 80px;
+
+    .section-title {
+        font-size: 20px;
+        font-weight: 600;
+    }
+
+    .flexed-container {
+        @include flexRules(space-evenly, row, center);
+        width: 100%;
+    }
+
+    .section-cards-container {
+        @include flexRules(space-between, row, center);
+        height: 150px;
+
+        &::-webkit-scrollbar {
+            width: 0;
+            background-color: transparent;
+        }
+
+        .section-cards {
+            width: 208px;
+            height: 130px;
+            margin-top: 10px;
+            margin-right: 8px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all .7s ease-in-out;
+
+            &:hover {
+                transform: scale(1.6, 1.3);
+                width: 100%;
+                height: 100%;
+                z-index: 50000;
+
+                .movie-details-container {
+                    opacity: 1;
+                    z-index: 50000;
+                    pointer-events: all;
+                }
+
+                .numberIcons{
+                    display: none;
+                }
+
+                .top10Film-fliers{
+                    width: 208px;
+                    height: 130px;
+                    margin-right: -80px;
+                }
+            }
+
+            .movie-details-container {
+                @include flexRules(space-between, row, flex-start);
+                background: #141414;
+                width: 185px;
+                height: 90px;
+                border: 1px solid #202020;
+                border-radius: 0 0 5px 5px;
+                padding: 10px;
+                border-top: none;
+                opacity: 0;
+                pointer-events: none;
+
+                .rounded-icons-container {
+                    @include flexRules(center, row, center);
+                    border: 1px solid rgb(180, 177, 177);
+                    border-radius: 50%;
+                    cursor: pointer;
+                    width: 18px;
+                    height: 18px;
+                }
+
+                .movie-details-inner-container {
+                    @include flexRules(flex-start, column, flex-start);
+                    width: 80%;
+
+                    .left-margin {
+                        margin-left: 8px;
+                    }
+
+                    .movie-details {
+                        @include flexRules(space-around, row, flex-start);
+
+                        .white-background {
+                            background: #fff;
+                        }
+                    }
+
+                    .film-ageRating-duration {
+                        @include flexRules(flex-start, row, flex-start);
+                        margin-top: 10px;
+                        font-size: 10px;
+                    }
+
+                    .film-genre {
+                        @include flexRules(flex-start, row, center);
+                        margin-top: 10px;
+                        font-size: 10px;
+                    }
+
+                }
+            }
+        }
+    }
+}
