@@ -5,76 +5,75 @@
     align-items: $alignment;
 }
 
-body{
-    background: #141414;
-    height: 100%;
-}
-
-.profile-page-container{
-    @include flexRules(center,column,center);
+.profile-page-container {
+    @include flexRules(center, column, center);
     display: flex;
     height: 100%;
     width: 100%;
     min-height: 850px;
 
-    .header{
+    .header {
         color: #fff;
         font-size: 52px;
         font-weight: 500;
     }
 
-    .profiles-btn{
-        @include flexRules(center,'',center);
+    .profiles-btn {
+        @include flexRules(center, '', center);
         border: 1px solid grey;
         color: grey;
         font-size: 18px;
         width: 190px;
         margin-top: 72px;
-        
-        &:hover{
+
+        &:hover {
             border: 1px solid #fff;
             color: #fff;
             font-size: 18px;
         }
     }
 
-    .profile-cards-container{
-        @include flexRules(space-evenly,row,center);
+    .profile-cards-container {
+        @include flexRules(space-evenly, row, center);
         width: 50%;
         flex-wrap: wrap;
         margin-top: 32px;
 
-        .profile-cards{
-            @include flexRules(center,column,center);
+        .profile-cards {
+            @include flexRules(center, column, center);
             color: grey;
             cursor: pointer;
             transition: all .8s ease-in-out;
 
-            &:hover{
+            &:hover {
                 color: #fff;
-                transform: scale(1.05); 
+                transform: scale(1.05);
 
 
-            .profile-icon{
-                border: 1px solid #fff;
+                .profile-icon {
+                    border: 1px solid #fff;
+                }
             }
-            }
 
-            .profile-icon{
-                @include flexRules(center,'',center);
+            .profile-icon {
+                @include flexRules(center, '', center);
                 border: 1px solid grey;
                 border-radius: 8px;
                 width: 200px;
                 height: 180px;
             }
 
-            .profile-name{
+            .profile-name {
                 margin-top: 12px;
-                font-size: 18px;
+                font-size: 22px;
                 font-weight: 500;
             }
         }
     }
 
-   
+    a {
+        text-decoration: none;
+    }
+
+
 }
