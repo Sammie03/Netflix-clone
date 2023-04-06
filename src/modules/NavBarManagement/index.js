@@ -3,7 +3,8 @@ import { useState, useEffect, useRef } from 'react'
 import { Input } from 'antd'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBell } from '@fortawesome/free-regular-svg-icons'
-import { faArrowCircleDown, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
+import { CaretDownOutlined } from '@ant-design/icons';
 import './style.scss'
 
 const NavBar = ({ profileName, profileIcon }) => {
@@ -14,17 +15,17 @@ const NavBar = ({ profileName, profileIcon }) => {
 
     useEffect(() => {
         const handleClickOutside = (event) => {
-          if (searchRef.current && !searchRef.current.contains(event.target)) {
-            setInitiateSearch(false);
-          }
+            if (searchRef.current && !searchRef.current.contains(event.target)) {
+                setInitiateSearch(false);
+            }
         };
-    
+
         document.addEventListener("mousedown", handleClickOutside);
-    
+
         return () => {
-          document.removeEventListener("mousedown", handleClickOutside);
+            document.removeEventListener("mousedown", handleClickOutside);
         };
-      }, [searchRef]);
+    }, [searchRef]);
 
 
     useEffect(() => {
@@ -61,23 +62,23 @@ const NavBar = ({ profileName, profileIcon }) => {
             </div>
             <div className={initiateSearch ? "search-notif-profile-space" : "search-notif-profile"}>
                 <div ref={searchRef} className='search-box-container'>
-                {initiateSearch ?
-                    <Input
-                        className="search-box"
-                        size="large"
-                        placeholder="Titles, people, genres"
-                        prefix={<FontAwesomeIcon
+                    {initiateSearch ?
+                        <Input
+                            className="search-box"
+                            size="large"
+                            placeholder="Titles, people, genres"
+                            prefix={<FontAwesomeIcon
+                                icon={faMagnifyingGlass}
+                                style={{ fontSize: '18px', cursor: 'pointer', color: '#fff' }}
+                            />}
+                        />
+                        :
+                        <FontAwesomeIcon
                             icon={faMagnifyingGlass}
-                            style={{ fontSize: '18px', cursor: 'pointer', color: '#fff' }}
-                        />}
-                    />
-                    :
-                    <FontAwesomeIcon
-                        icon={faMagnifyingGlass}
-                        style={{ fontSize: '22px', cursor: 'pointer' }}
-                        onClick={() => { setInitiateSearch(true) }}
-                    />
-                }
+                            style={{ fontSize: '22px', cursor: 'pointer' }}
+                            onClick={() => { setInitiateSearch(true) }}
+                        />
+                    }
                 </div>
 
                 <span className="kids-corner">Kids</span>
@@ -97,8 +98,7 @@ const NavBar = ({ profileName, profileIcon }) => {
                             height={30}
                         />
                     </div>
-                    <FontAwesomeIcon
-                        icon={faArrowCircleDown}
+                    <CaretDownOutlined
                         onMouseOver={() => { setRotateIcon(true) }}
                         onMouseOut={() => { setRotateIcon(false) }}
                         style={{ fontSize: '16px', marginLeft: '8px', cursor: 'pointer' }}

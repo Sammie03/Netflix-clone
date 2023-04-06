@@ -19,7 +19,6 @@ import TrendingTvShows from '../../FilmManagement/TrendingTvShows';
 import { useSelector } from 'react-redux';
 import { TMDB_API_KEY } from '../../../Utils/api';
 import axios from 'axios';
-import YouTube from 'react-youtube';
 import './style.scss'
 
 const HomePage = () => {
@@ -99,16 +98,8 @@ const HomePage = () => {
                   // src={bannerVideo}
                   allow='autoplay'
                   allowFullScreen
-                  >
+                >
                 </iframe>
-{/* 
-                <YouTube
-                  // videoId={videoKey}
-                  opts={opts}
-                  onReady={onReady}
-                  // onStateChange={this.onStateChange}
-                  // className='videoPlayerStyle'
-                /> */}
               </div>
             </div> : ''
         }

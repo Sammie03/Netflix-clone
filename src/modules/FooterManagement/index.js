@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
-import { YoutubeFilled, FacebookOutlined, InstagramOutlined  } from '@ant-design/icons'
+import { YoutubeFilled, FacebookOutlined, InstagramOutlined } from '@ant-design/icons'
 import { Button } from 'antd'
 import './style.scss'
 
@@ -11,9 +11,9 @@ const Footer = () => {
             <div className="first-footer-section">
                 <ul>
                     <li className='social-media-icons'>
-                        <FacebookOutlined/>
-                        <InstagramOutlined/>
-                        <YoutubeFilled/>
+                        <FacebookOutlined />
+                        <InstagramOutlined />
+                        <YoutubeFilled />
                     </li>
                     <li>Audio Description</li>
                     <li>Investor Relations</li>

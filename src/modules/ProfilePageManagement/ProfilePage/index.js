@@ -26,7 +26,7 @@ const ProfilePage = () => {
         let profileDetails = [name, icon]
         window.localStorage.setItem("profileDetails", JSON.stringify(profileDetails))
     }
-    
+
 
 
     return (
@@ -38,7 +38,7 @@ const ProfilePage = () => {
                 {profiles.map(({ id, profileIcon, profileName }) => {
                     return (
                         <a href="/home">
-                            <div key={id} className="profile-cards" onClick={()=>{setProfileDetails(profileName, profileIcon)}}>
+                            <div key={id} className="profile-cards" onClick={() => { setProfileDetails(profileName, profileIcon) }}>
                                 <div className='profile-icon'><img src={profileIcon} alt="profile-icon" /></div>
                                 <span className='profile-name'>{profileName}</span>
                             </div>

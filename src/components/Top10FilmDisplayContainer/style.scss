@@ -25,7 +25,6 @@
     }
 
     .section-cards-container {
-        @include flexRules(space-between, row, center);
         height: 150px;
 
         &::-webkit-scrollbar {
@@ -44,21 +43,19 @@
 
             &:hover {
                 transform: scale(1.6, 1.3);
-                width: 100%;
-                height: 100%;
-                z-index: 50000;
+                z-index: 5000;
 
                 .movie-details-container {
                     opacity: 1;
-                    z-index: 50000;
+                    z-index: 5000;
                     pointer-events: all;
                 }
 
-                .numberIcons{
+                .numberIcons {
                     display: none;
                 }
 
-                .top10Film-fliers{
+                .top10Film-fliers {
                     width: 208px;
                     height: 130px;
                     margin-right: -80px;
@@ -118,4 +115,17 @@
             }
         }
     }
+}
+
+.slick-prev,
+.slick-next {
+    top: 30% !important;
+}
+
+.slick-next {
+    right: 90px !important;
+}
+
+.slick-list {
+    overflow: visible !important;
 }
