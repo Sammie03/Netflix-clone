@@ -11,16 +11,20 @@ import './style.scss'
 const TvShows = () => {
     const dispatch = useDispatch();
     const tvShows = useSelector(({ homePageFilms }) => homePageFilms.tvShows && homePageFilms.tvShows.results);
+    let responseStatusCode = 444;
 
     useEffect(() => {
         const fetchTvShows = async () => {
             try {
                 const response = await axios.get(TV_SHOWS_API);
                 const data = response.data;
+                responseStatusCode = response.status || 200
                 dispatch(getTvShows(data))
             } catch (error) {
                 console.log(error.message)
+                responseStatusCode = error.status || 500
             }
+            return { statusCode: responseStatusCode }
         }
         return fetchTvShows;
     }, [dispatch]);

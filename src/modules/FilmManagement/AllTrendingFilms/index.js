@@ -15,6 +15,7 @@ const AllTrendingFilms = () => {
     const trendingFilms = useSelector(({ homePageFilms }) => homePageFilms.trendingFilms && homePageFilms.trendingFilms.results);
     console.log(trendingFilms, 'see trending films')
     const [mouseOnFilm, setMouseOnFilm] = useState(false);
+    let responseStatusCode = 444;
 
     useEffect(() => {
         const fetchAllTrendingFilms = async () => {
@@ -22,9 +23,12 @@ const AllTrendingFilms = () => {
                 const response = await axios.get(ALL_TRENDING_FILMS_API);
                 const data = response.data;
                 dispatch(getAllTrendingFilms(data))
+                responseStatusCode = response.status || 200
             } catch (error) {
                 console.log(error.message)
+                responseStatusCode = error.status || 500
             }
+            return { statusCode: responseStatusCode }
         }
         return fetchAllTrendingFilms;
     }, [dispatch]);

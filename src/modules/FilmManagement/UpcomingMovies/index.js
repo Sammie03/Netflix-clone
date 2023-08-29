@@ -11,16 +11,20 @@ import './style.scss'
 const UpcomingMovies = () => {
     const dispatch = useDispatch();
     const upcomingMovies = useSelector(({ homePageFilms }) => homePageFilms.upcomingMovies && homePageFilms.upcomingMovies.results);
+    let responseStatusCode = 444;
 
     useEffect(() => {
         const fetchUpcomingMovies = async () => {
             try {
                 const response = await axios.get(UPCOMING_MOVIES_API);
                 const data = response.data;
+                responseStatusCode = response.status || 200
                 dispatch(getUpcomingMovies(data))
             } catch (error) {
                 console.log(error.message)
+                responseStatusCode = error.status || 500
             }
+            return { statusCode: responseStatusCode }
         }
         return fetchUpcomingMovies;
     }, [dispatch]);

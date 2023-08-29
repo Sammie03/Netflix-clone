@@ -11,16 +11,20 @@ import './style.scss'
 const PopularMovies = () => {
     const dispatch = useDispatch();
     const popularMovies = useSelector(({ homePageFilms }) => homePageFilms.popularMovies && homePageFilms.popularMovies.results);
+    let responseStatusCode = 444;
 
     useEffect(() => {
         const fetchPopularMovies = async () => {
             try {
                 const response = await axios.get(POPULAR_MOVIES_API);
                 const data = response.data;
+                responseStatusCode = response.status || 200
                 dispatch(getPopularMovies(data))
             } catch (error) {
                 console.log(error.message)
+                responseStatusCode = error.status || 500
             }
+            return { statusCode: responseStatusCode }
         }
         return fetchPopularMovies;
     }, [dispatch]);
