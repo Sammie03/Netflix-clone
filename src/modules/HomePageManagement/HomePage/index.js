@@ -17,7 +17,6 @@ import Top10TvShows from '../../FilmManagement/Top10TvShows';
 import TopRatedTvShows from '../../FilmManagement/TopRatedTvShows';
 import TrendingTvShows from '../../FilmManagement/TrendingTvShows';
 import { useSelector } from 'react-redux';
-import { TMDB_API_KEY } from '../../../Utils/api';
 import ReactPlayer from 'react-player/youtube'
 import FullScreenPlayer from '../../../components/FullScreenPlayer';
 import axios from 'axios';
@@ -41,7 +40,7 @@ const HomePage = () => {
   }
 
   const getFilmVideo = async (movie_id) => {
-    const Movie_Video_API = `https://api.themoviedb.org/3/movie/${movie_id}/videos?api_key=${TMDB_API_KEY}&language=en-US`
+    const Movie_Video_API = `https://api.themoviedb.org/3/movie/${movie_id}/videos?api_key=${process.env.REACT_APP_TMDB}&language=en-US`
     try {
       const response = await axios.get(Movie_Video_API);
       const data = response.data;
