@@ -7,17 +7,17 @@ const ProfilePage = () => {
     const profiles = [
         {
             id: 1,
-            profileIcon: "resources/images/squid-triangle.png",
+            profileIcon: "resources/images/avatar1.png",
             profileName: "Romeo"
         },
         {
             id: 2,
-            profileIcon: "resources/images/squid-circle.png",
+            profileIcon: "resources/images/avatar2.png",
             profileName: "Jessica"
         },
         {
             id: 3,
-            profileIcon: "resources/images/squid-square.png",
+            profileIcon: "resources/images/avatar3.png",
             profileName: "Kids"
         }
     ]
@@ -39,7 +39,7 @@ const ProfilePage = () => {
                     return (
                         <a href="/home">
                             <div key={id} className="profile-cards" onClick={() => { setProfileDetails(profileName, profileIcon) }}>
-                                <div className='profile-icon'><img src={profileIcon} alt="profile-icon" /></div>
+                                <div className='profile-icon'><img src={profileIcon} alt="profile-icon" width={220} height={220}/></div>
                                 <span className='profile-name'>{profileName}</span>
                             </div>
                         </a>

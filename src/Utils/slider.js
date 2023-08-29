@@ -23,15 +23,17 @@ const SlidePrevArrow = (props) => {
 }
 
 export const sliderSettings = {
-    dots: false,
     infinite: true,
-    speed: 500,
+    speed: 400,
     slidesToShow: 6,
     slidesToScroll: 4,
-    adaptiveHeight: false,
+    // adaptiveHeight: false,
     arrows: true,
-    centerPadding: '10px',
+    // centerPadding: '10px',
     swipeToSlide: true,
     nextArrow: <SlideNextArrow />,
-    prevArrow: <SlidePrevArrow />
+    prevArrow: <SlidePrevArrow />,
+    dots: true,
+    // fade: true,
+    cssEase: 'linear'
 };

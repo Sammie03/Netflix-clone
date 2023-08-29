@@ -26,6 +26,7 @@
 
     .section-cards-container {
         height: 150px;
+        position: relative;
 
         &::-webkit-scrollbar {
             width: 0;
@@ -39,16 +40,32 @@
             margin-right: 8px;
             border-radius: 6px;
             cursor: pointer;
-            transition: all .7s ease-in-out;
+            transition: all .4s ease-in-out;
+            transition-delay: 300ms;
+            position: relative;
+
+            img {
+                opacity: 0.7;
+                transition: opacity 100ms;
+                transition-delay: 100ms;
+            }
 
             &:hover {
                 transform: scale(1.6, 1.3);
-                z-index: 5000;
+                z-index: 6000;
+
+                img {
+                    opacity: 0.9;
+                    transition: opacity 100ms;
+                    transition-delay: 100ms;
+                }
 
                 .movie-details-container {
                     opacity: 1;
-                    z-index: 5000;
+                    transition: opacity 300ms;
+                    transition-delay: 300ms;
                     pointer-events: all;
+                    // margin-left: '-80px' 
                 }
 
                 .numberIcons {
@@ -56,16 +73,16 @@
                 }
 
                 .top10Film-fliers {
-                    width: 208px;
+                    width: 218px;
                     height: 130px;
-                    margin-right: -80px;
+                    margin-right: -57px;
                 }
             }
 
             .movie-details-container {
                 @include flexRules(space-between, row, flex-start);
                 background: #141414;
-                width: 185px;
+                width: 195px;
                 height: 90px;
                 border: 1px solid #202020;
                 border-radius: 0 0 5px 5px;
@@ -115,17 +132,52 @@
             }
         }
     }
-}
 
-.slick-prev,
-.slick-next {
-    top: 30% !important;
-}
+    .slick-prev,
+    .slick-next {
+        top: 30% !important;
+    }
 
-.slick-next {
-    right: 90px !important;
-}
+    .slick-next {
+        right: 110px !important;
+    }
 
-.slick-list {
-    overflow: visible !important;
+    .slick-list {
+        overflow: visible !important;
+        z-index: 1000 !important;
+
+        &:hover {
+            z-index: 2000 !important;
+        }
+    }
+
+    .slick-dots {
+        top: -25px !important;
+        right: -500px !important;
+    }
+    
+    .slick-dots li button
+    {
+        width: 70px !important;
+        height: 30px !important;
+        color: white !important;
+    }
+    
+    .slick-dots li button:before
+    {
+        font-size: 24px !important;
+        font-weight: 900 !important;
+        width: 70px !important;
+        height: 10px !important;
+    
+        content: '---'!important;
+        text-align: center;
+    
+        opacity: .25;
+        color: white!important;
+    }
+    .slick-dots li.slick-active button:before
+    {
+        color: white!important;
+    }
 }

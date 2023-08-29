@@ -1,11 +1,11 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
-import { Button } from 'antd';
+import { Button, Modal } from 'antd';
 import { InfoCircleOutlined } from '@ant-design/icons';
 import NavBar from '../../NavBarManagement';
 import Footer from '../../FooterManagement';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlay, faVolumeHigh } from '@fortawesome/free-solid-svg-icons'
+import { faPlay, faVolumeHigh, faVolumeMute, faCircleXmark } from '@fortawesome/free-solid-svg-icons'
 import AllTrendingFilms from '../../FilmManagement/AllTrendingFilms';
 import TopRatedMovies from '../../FilmManagement/TopRatedMovies';
 import PopularMovies from '../../FilmManagement/PopularMovies';
@@ -18,6 +18,8 @@ import TopRatedTvShows from '../../FilmManagement/TopRatedTvShows';
 import TrendingTvShows from '../../FilmManagement/TrendingTvShows';
 import { useSelector } from 'react-redux';
 import { TMDB_API_KEY } from '../../../Utils/api';
+import ReactPlayer from 'react-player/youtube'
+import FullScreenPlayer from '../../../components/FullScreenPlayer';
 import axios from 'axios';
 import './style.scss'
 
@@ -28,7 +30,10 @@ const HomePage = () => {
   const [playBannerVideo, setPlayBannerVideo] = useState(false);
   const [bannerVideo, setBannerVideo] = useState('');
   const [videoKey, setVideoKey] = useState('');
-  const bannerFilms = useSelector(({ homePageFilms }) => homePageFilms.trendingFilms && homePageFilms.trendingFilms.results);
+  const [volume, setVolume] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [showVolumeIcon, setShowVolumeIcon] = useState(false);
+  const bannerFilms = useSelector(({ homePageFilms }) => homePageFilms.top10Movies && homePageFilms.top10Movies.results);
 
   const generateBannerFilmIndex = () => {
     const random = Math.floor(Math.random() * (20 - 1) + 1);
@@ -42,8 +47,7 @@ const HomePage = () => {
       const data = response.data;
       const videoKey = data.results[data.results.length - 1].key;
       setVideoKey(videoKey)
-      setBannerVideo(`https://www.youtube.com/embed/${videoKey}?loop=1&autoplay=1&controls=0&mute=1`);
-      console.log(bannerVideo, 'yes, I ran')
+      setBannerVideo(`https://www.youtube.com/embed/${videoKey}`);
     } catch (error) {
       console.log(error.message)
     }
@@ -67,20 +71,28 @@ const HomePage = () => {
     }, 2000);
   });
 
-  const onReady = (event) => {
-    event.target.playVideo();
+  const volumeHandler = () => {
+    setVolume(!volume);
   }
 
-  const opts = {
-    playerVars: {
-      autoplay: 1,
-      mute: 1,
-      modestbranding: 1,
-      autohide: 1,
-      showinfo: 0,
-      controls: 0
-    }
-  };
+  useEffect(() => {
+    window.addEventListener("scroll", muteBannerVideo);
+    return function cleanup() {
+      window.removeEventListener("scroll", muteBannerVideo);
+    };
+  });
+
+  const muteBannerVideo = () => {
+    setVolume(false);
+  }
+
+  const showModalHandler = () => {
+    setShowModal(true);
+  }
+
+  const closeModalHandler = () => {
+    setShowModal(false);
+  }
 
   return (
     <div className='homepage-container'>
@@ -94,12 +106,14 @@ const HomePage = () => {
           playBannerVideo ?
             <div className="video-background">
               <div className="video-foreground">
-                <iframe width="420" height="315" className=''
-                  // src={bannerVideo}
-                  allow='autoplay'
-                  allowFullScreen
-                >
-                </iframe>
+                <ReactPlayer
+                  url={bannerVideo}
+                  loop={true}
+                  volume={1}
+                  muted={!volume}
+                  playing={true}
+                  onStart={() => { setShowVolumeIcon(true) }}
+                />
               </div>
             </div> : ''
         }
@@ -122,18 +136,55 @@ const HomePage = () => {
               </span><br /><br />
               <span className='desciption'>{bannerFilms && bannerFilms[bannerFilmIndex].overview}</span><br /><br /><br />
               <div className="btn-container">
-                <Button className='play-btn'>
-                  <FontAwesomeIcon
-                    icon={faPlay}
-                    style={{ marginRight: '10px', fontSize: '25px' }}
-                  />
-                  Play</Button>
-                <Button className='more-info-btn'><InfoCircleOutlined style={{ color: "white", fontSize: '24px' }} /> More Info</Button>
+                <a href="/watching" className='play-btn-link'>
+                  <Button className='play-btn'>
+                    <FontAwesomeIcon
+                      icon={faPlay}
+                      style={{ marginRight: '10px', fontSize: '25px' }}
+                    />
+                    Play</Button>
+                </a>
+                <Button
+                  className='more-info-btn'
+                  onClick={showModalHandler}
+                >
+                  <InfoCircleOutlined style={{ color: "white", fontSize: '24px' }} />
+                  More Info
+                </Button>
+
+                <Modal
+                  onCancel={closeModalHandler}
+                  centered={true}
+                  width={750}
+                  footer={null}
+                  visible={showModal}
+                  closeIcon={<FontAwesomeIcon
+                    icon={faCircleXmark}
+                    style={{ fontSize: '30px', color: 'black' }}
+                  />}
+                  className='more-info-modal'
+                >
+                  <div className="more-info-banner">
+                      Back to square 1
+                  </div>
+                  <div className="more-info-film-details">
+
+                  </div>
+                </Modal>
+                {/* <FullScreenPlayer video={bannerVideo} style={{display: 'none'}}/> */}
               </div>
             </div>
             <div className="volumn-age-container">
               <div className="volumn-age-rate">
-                <div className="volume-container"><FontAwesomeIcon icon={faVolumeHigh} /></div>
+                {showVolumeIcon ?
+
+                  volume ?
+                    <div className="volume-container" onClick={volumeHandler}><FontAwesomeIcon icon={faVolumeHigh} /></div>
+                    :
+                    <div className="volume-container" onClick={volumeHandler}><FontAwesomeIcon icon={faVolumeMute} /></div>
+
+                  : ''}
+
                 <div className="age-rate-container">
                   <div className="white-age-div"></div>
                   <div className="dark-age-div">
