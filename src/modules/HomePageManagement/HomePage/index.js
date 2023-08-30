@@ -40,7 +40,7 @@ const HomePage = () => {
   }
 
   const getFilmVideo = async (movie_id) => {
-    const Movie_Video_API = `https://api.themoviedb.org/3/movie/200/videos?api_key=${process.env.REACT_APP_TMDB}&language=en-US`
+    const Movie_Video_API = `https://api.themoviedb.org/3/movie/${movie_id}/videos?api_key=${process.env.REACT_APP_TMDB}&language=en-US`
     let responseStatusCode = 444;
     try {
       const response = await axios.get(Movie_Video_API);
@@ -71,7 +71,7 @@ const HomePage = () => {
     const bannerVideoPlayer = setTimeout(() => {
       setPlayBannerVideo(true);
       getFilmVideo(bannerFilms && bannerFilms[bannerFilmIndex].id)
-    }, 10000);
+    }, 3000);
   });
 
   const volumeHandler = () => {
