@@ -41,15 +41,19 @@ const HomePage = () => {
 
   const getFilmVideo = async (movie_id) => {
     const Movie_Video_API = `https://api.themoviedb.org/3/movie/${movie_id}/videos?api_key=${process.env.REACT_APP_TMDB}&language=en-US`
+    let responseStatusCode = 444;
     try {
       const response = await axios.get(Movie_Video_API);
       const data = response.data;
+      responseStatusCode = response.status || 200
       const videoKey = data.results[data.results.length - 1].key;
       setVideoKey(videoKey)
       setBannerVideo(`https://www.youtube.com/embed/${videoKey}`);
     } catch (error) {
       console.log(error.message)
+      responseStatusCode = error.status || 500
     }
+    return { statusCode: responseStatusCode }
   }
 
   useEffect(() => {
@@ -67,7 +71,7 @@ const HomePage = () => {
     const bannerVideoPlayer = setTimeout(() => {
       setPlayBannerVideo(true);
       getFilmVideo(bannerFilms && bannerFilms[bannerFilmIndex].id)
-    }, 2000);
+    }, 10000);
   });
 
   const volumeHandler = () => {
