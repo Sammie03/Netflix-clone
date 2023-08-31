@@ -18,8 +18,8 @@ const UpcomingMovies = () => {
             try {
                 const response = await axios.get(UPCOMING_MOVIES_API);
                 const data = response.data;
-                responseStatusCode = response.status || 200
                 dispatch(getUpcomingMovies(data))
+                responseStatusCode = response.status || 200
             } catch (error) {
                 console.log(error.message)
                 responseStatusCode = error.status || 500

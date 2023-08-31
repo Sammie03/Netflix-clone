@@ -18,7 +18,7 @@ const FilmDisplayContainer = ({ sectionTitle, sectionFilms }) => {
                         return (
                             <div className="section-cards" key={id}>
                                 <img
-                                    src={poster_path !== null ? `https://image.tmdb.org/t/p/w500/${poster_path}` : `https://image.tmdb.org/t/p/w500/${backdrop_path}`}
+                                    src={poster_path !== null ? `https://image.tmdb.org/t/p/w500/5` : `https://image.tmdb.org/t/p/w500/5`}
                                     width={218}
                                     height={130}
                                     alt="film-poster"

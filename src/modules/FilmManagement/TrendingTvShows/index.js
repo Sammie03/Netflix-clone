@@ -18,8 +18,8 @@ const TrendingTvShows = () => {
             try {
                 const response = await axios.get(TRENDING_TV_SHOWS_API);
                 const data = response.data;
-                responseStatusCode = response.status || 200
                 dispatch(getTrendingTvShows(data))
+                responseStatusCode = response.status || 200
             } catch (error) {
                 console.log(error.message)
                 responseStatusCode = error.status || 500

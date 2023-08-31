@@ -18,8 +18,8 @@ const PopularMovies = () => {
             try {
                 const response = await axios.get(POPULAR_MOVIES_API);
                 const data = response.data;
-                responseStatusCode = response.status || 200
                 dispatch(getPopularMovies(data))
+                responseStatusCode = response.status || 200
             } catch (error) {
                 console.log(error.message)
                 responseStatusCode = error.status || 500

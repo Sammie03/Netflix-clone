@@ -18,8 +18,8 @@ const TvShows = () => {
             try {
                 const response = await axios.get(TV_SHOWS_API);
                 const data = response.data;
-                responseStatusCode = response.status || 200
                 dispatch(getTvShows(data))
+                responseStatusCode = response.status || 200
             } catch (error) {
                 console.log(error.message)
                 responseStatusCode = error.status || 500
