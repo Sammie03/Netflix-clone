@@ -17,7 +17,7 @@ const UpcomingMovies = () => {
         const fetchUpcomingMovies = async () => {
             try {
                 const response = await axios.get(UPCOMING_MOVIES_API);
-                const data = response.data;
+                const data =  response && response.data;
                 dispatch(getUpcomingMovies(data))
                 responseStatusCode = response.status || 200
             } catch (error) {

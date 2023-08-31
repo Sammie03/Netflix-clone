@@ -21,7 +21,7 @@ const AllTrendingFilms = () => {
         const fetchAllTrendingFilms = async () => {
             try {
                 const response = await axios.get(ALL_TRENDING_FILMS_API);
-                const data = response.data;
+                const data =  response && response.data;
                 dispatch(getAllTrendingFilms(data))
                 responseStatusCode = response.status || 200
             } catch (error) {

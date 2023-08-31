@@ -44,7 +44,7 @@ const HomePage = () => {
     let responseStatusCode = 444;
     try {
       const response = await axios.get(Movie_Video_API);
-      const data = response.data;
+      const data =  response && response.data;
       responseStatusCode = response.status || 200
       const videoKey = data.results[data.results.length - 1].key;
       setVideoKey(videoKey)

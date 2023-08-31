@@ -17,7 +17,7 @@ const Top10TvShows = () => {
         const fetchTop10TvShows = async () => {
             try {
                 const response = await axios.get(TOP_10_TV_SHOWS_API);
-                const data = response.data;
+                const data =  response && response.data;
                 dispatch(getTop10TvShows(data))
                 responseStatusCode = response.status || 200
             } catch (error) {

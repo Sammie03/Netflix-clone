@@ -17,7 +17,7 @@ const TopRatedMovies = () => {
         const fetchTopRatedMovies = async () => {
             try {
                 const response = await axios.get(TOP_RATED_MOVIES_API);
-                const data = response.data;
+                const data =  response && response.data;
                 dispatch(getTopRatedMovies(data))
                 responseStatusCode = response.status || 200
             } catch (error) {

@@ -17,7 +17,7 @@ const TrendingTvShows = () => {
         const fetchTrendingTvShows = async () => {
             try {
                 const response = await axios.get(TRENDING_TV_SHOWS_API);
-                const data = response.data;
+                const data =  response && response.data;
                 dispatch(getTrendingTvShows(data))
                 responseStatusCode = response.status || 200
             } catch (error) {

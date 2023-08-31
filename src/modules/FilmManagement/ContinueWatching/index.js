@@ -17,7 +17,7 @@ const ContinueWatching = ({ user }) => {
         const fetchPopularMovies = async () => {
             try {
                 const response = await axios.get(POPULAR_MOVIES_API);
-                const data = response.data;
+                const data =  response && response.data;
                 dispatch(getPopularMovies(data))
                 responseStatusCode = response.status || 200
             } catch (error) {
