@@ -1,2 +1,6 @@
 /*    /index.html    200
 /GET https://api.themoviedb.org/3 200!
+[[redirects]]
+from = “/api/*”
+to = “/.netlify/functions/:splat”
+status = 200
