@@ -13,16 +13,10 @@ const TopRatedTvShows = () => {
     const topRatedTvShows = useSelector(({ homePageFilms }) => homePageFilms.topRatedTvShows && homePageFilms.topRatedTvShows.results);
     let responseStatusCode = 444;
 
-    console.log(topRatedTvShows, 'see top rated showzz')
-
-
     const fetchTopRatedTvShows = async () => {
-        console.log('before try')
         try {
-            console.log('after try')
             const response = await axios.get(`https://api.themoviedb.org/3/tv/top_rated?api_key=${process.env.REACT_APP_TMDB}&language=en-US&page=1`);
             const data = response && response.data;
-            console.log(data, 'see top rated data')
             dispatch(getTopRatedTvShows(data))
             responseStatusCode = response.status || 200
         } catch (error) {

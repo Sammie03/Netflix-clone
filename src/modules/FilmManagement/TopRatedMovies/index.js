@@ -13,20 +13,22 @@ const TopRatedMovies = () => {
     const topRatedMovies = useSelector(({ homePageFilms }) => homePageFilms.topRatedMovies && homePageFilms.topRatedMovies.results);
     let responseStatusCode = 444;
 
-    useEffect(() => {
-        const fetchTopRatedMovies = async () => {
-            try {
-                const response = await axios.get(TOP_RATED_MOVIES_API);
-                const data =  response && response.data;
-                dispatch(getTopRatedMovies(data))
-                responseStatusCode = response.status || 200
-            } catch (error) {
-                console.log(error.message)
-                responseStatusCode = error.status || 500
-            }
-            return { statusCode: responseStatusCode }
+
+    const fetchTopRatedMovies = async () => {
+        try {
+            const response = await axios.get(TOP_RATED_MOVIES_API);
+            const data = response && response.data;
+            dispatch(getTopRatedMovies(data))
+            responseStatusCode = response.status || 200
+        } catch (error) {
+            console.log(error.message)
+            responseStatusCode = error.status || 500
         }
-        return fetchTopRatedMovies;
+        return { statusCode: responseStatusCode }
+    }
+
+    useEffect(() => {
+        fetchTopRatedMovies()
     }, [dispatch]);
 
 

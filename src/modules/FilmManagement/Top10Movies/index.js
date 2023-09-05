@@ -13,27 +13,28 @@ const Top10Movies = () => {
     const top10Movies = useSelector(({ homePageFilms }) => homePageFilms.top10Movies && homePageFilms.top10Movies.results);
     let responseStatusCode = 444;
 
-    useEffect(() => {
-        const fetchTop10Movies = async () => {
-            try {
-                const response = await axios.get(TOP_10_MOVIES_API);
-                const data =  response && response.data;
-                dispatch(getTop10Movies(data))
-                responseStatusCode = response.status || 200
-            } catch (error) {
-                console.log(error.message)
-                responseStatusCode = error.status || 500
-            }
-            return { statusCode: responseStatusCode }
+    const fetchTop10Movies = async () => {
+        try {
+            const response = await axios.get(TOP_10_MOVIES_API);
+            const data = response && response.data;
+            dispatch(getTop10Movies(data))
+            responseStatusCode = response.status || 200
+        } catch (error) {
+            console.log(error.message)
+            responseStatusCode = error.status || 500
         }
-        return fetchTop10Movies;
+        return { statusCode: responseStatusCode }
+    }
+
+    useEffect(() => {
+        fetchTop10Movies()
     }, [dispatch]);
 
     return (
         <div className="top-10-movies-container film-container-positive-margin">
             <Top10FilmDisplayContainer
-            sectionTitle=" Top 10 Movies in Nigeria Today"
-            sectionFilms={top10Movies}
+                sectionTitle=" Top 10 Movies in Nigeria Today"
+                sectionFilms={top10Movies}
             />
         </div>
     )

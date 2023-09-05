@@ -17,21 +17,24 @@ const AllTrendingFilms = () => {
     const [mouseOnFilm, setMouseOnFilm] = useState(false);
     let responseStatusCode = 444;
 
-    useEffect(() => {
-        const fetchAllTrendingFilms = async () => {
-            try {
-                const response = await axios.get(ALL_TRENDING_FILMS_API);
-                const data =  response && response.data;
-                dispatch(getAllTrendingFilms(data))
-                responseStatusCode = response.status || 200
-            } catch (error) {
-                console.log(error.message)
-                responseStatusCode = error.status || 500
-            }
-            return { statusCode: responseStatusCode }
+
+    const fetchAllTrendingFilms = async () => {
+        try {
+            const response = await axios.get(ALL_TRENDING_FILMS_API);
+            const data = response && response.data;
+            dispatch(getAllTrendingFilms(data))
+            responseStatusCode = response.status || 200
+        } catch (error) {
+            console.log(error.message)
+            responseStatusCode = error.status || 500
         }
-        return fetchAllTrendingFilms;
+        return { statusCode: responseStatusCode }
+    }
+
+    useEffect(() => {
+        fetchAllTrendingFilms()
     }, [dispatch]);
+
 
     return (
         <div className="all-trending-films-container">

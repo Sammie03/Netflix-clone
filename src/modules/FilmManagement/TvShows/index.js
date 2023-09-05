@@ -13,23 +13,22 @@ const TvShows = () => {
     const tvShows = useSelector(({ homePageFilms }) => homePageFilms.tvShows && homePageFilms.tvShows.results);
     let responseStatusCode = 444;
 
-    useEffect(() => {
-        const fetchTvShows = async () => {
-            try {
-                const response = await axios.get(TV_SHOWS_API);
-                const data =  response && response.data;
-                dispatch(getTvShows(data))
-                responseStatusCode = response.status || 200
-            } catch (error) {
-                console.log(error.message)
-                responseStatusCode = error.status || 500
-            }
-            return { statusCode: responseStatusCode }
+    const fetchTvShows = async () => {
+        try {
+            const response = await axios.get(TV_SHOWS_API);
+            const data = response && response.data;
+            dispatch(getTvShows(data))
+            responseStatusCode = response.status || 200
+        } catch (error) {
+            console.log(error.message)
+            responseStatusCode = error.status || 500
         }
-        return fetchTvShows;
+        return { statusCode: responseStatusCode }
+    }
+
+    useEffect(() => {
+        fetchTvShows();
     }, [dispatch]);
-
-
 
     return (
         <div className="tv-shows-container film-container-positive-margin">

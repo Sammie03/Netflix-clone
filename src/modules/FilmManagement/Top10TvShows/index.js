@@ -13,22 +13,22 @@ const Top10TvShows = () => {
     const top10TvShows = useSelector(({ homePageFilms }) => homePageFilms.top10TvShows && homePageFilms.top10TvShows.results);
     let responseStatusCode = 444;
 
-    useEffect(() => {
-        const fetchTop10TvShows = async () => {
-            try {
-                const response = await axios.get(TOP_10_TV_SHOWS_API);
-                const data =  response && response.data;
-                dispatch(getTop10TvShows(data))
-                responseStatusCode = response.status || 200
-            } catch (error) {
-                console.log(error.message)
-                responseStatusCode = error.status || 500
-            }
-            return { statusCode: responseStatusCode }
+    const fetchTop10TvShows = async () => {
+        try {
+            const response = await axios.get(TOP_10_TV_SHOWS_API);
+            const data = response && response.data;
+            dispatch(getTop10TvShows(data))
+            responseStatusCode = response.status || 200
+        } catch (error) {
+            console.log(error.message)
+            responseStatusCode = error.status || 500
         }
-        return fetchTop10TvShows;
-    }, [dispatch]);
+        return { statusCode: responseStatusCode }
+    }
 
+    useEffect(() => {
+        fetchTop10TvShows()
+    }, [dispatch]);
 
 
     return (

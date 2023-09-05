@@ -13,23 +13,22 @@ const UpcomingMovies = () => {
     const upcomingMovies = useSelector(({ homePageFilms }) => homePageFilms.upcomingMovies && homePageFilms.upcomingMovies.results);
     let responseStatusCode = 444;
 
-    useEffect(() => {
-        const fetchUpcomingMovies = async () => {
-            try {
-                const response = await axios.get(UPCOMING_MOVIES_API);
-                const data =  response && response.data;
-                dispatch(getUpcomingMovies(data))
-                responseStatusCode = response.status || 200
-            } catch (error) {
-                console.log(error.message)
-                responseStatusCode = error.status || 500
-            }
-            return { statusCode: responseStatusCode }
+    const fetchUpcomingMovies = async () => {
+        try {
+            const response = await axios.get(UPCOMING_MOVIES_API);
+            const data = response && response.data;
+            dispatch(getUpcomingMovies(data))
+            responseStatusCode = response.status || 200
+        } catch (error) {
+            console.log(error.message)
+            responseStatusCode = error.status || 500
         }
-        return fetchUpcomingMovies;
+        return { statusCode: responseStatusCode }
+    }
+
+    useEffect(() => {
+        fetchUpcomingMovies();
     }, [dispatch]);
-
-
 
     return (
         <div className="upcoming-movies-container film-container-positive-margin">
