@@ -40,6 +40,7 @@ const HomePage = () => {
   }
 
   const getFilmVideo = async (movie_id) => {
+    console.log(movie_id, 'see if its showing')
     const Movie_Video_API = `https://api.themoviedb.org/3/movie/${movie_id}/videos?api_key=${process.env.REACT_APP_TMDB}&language=en-US`
     let responseStatusCode = 444;
     try {
