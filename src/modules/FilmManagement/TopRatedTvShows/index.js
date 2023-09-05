@@ -13,7 +13,7 @@ const TopRatedTvShows = () => {
     const topRatedTvShows = useSelector(({ homePageFilms }) => homePageFilms.topRatedTvShows && homePageFilms.topRatedTvShows.results);
     let responseStatusCode = 444;
 
-    console.log(topRatedTvShows, 'see top rated showsssss')
+    console.log(topRatedTvShows, 'see top rated showzz')
 
 
     const fetchTopRatedTvShows = async () => {
