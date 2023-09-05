@@ -40,21 +40,22 @@ const HomePage = () => {
   }
 
   const getFilmVideo = async (movie_id) => {
-    console.log(movie_id, 'see if its showing')
-    const Movie_Video_API = `https://api.themoviedb.org/3/movie/${movie_id}/videos?api_key=${process.env.REACT_APP_TMDB}&language=en-US`
-    let responseStatusCode = 444;
-    try {
-      const response = await axios.get(Movie_Video_API);
-      const data =  response && response.data;
-      responseStatusCode = response.status || 200
-      const videoKey = data.results[data.results.length - 1].key;
-      setVideoKey(videoKey)
-      setBannerVideo(`https://www.youtube.com/embed/${videoKey}`);
-    } catch (error) {
-      console.log(error.message)
-      responseStatusCode = error.status || 500
+    if(movie_id !== undefined){
+      const Movie_Video_API = `https://api.themoviedb.org/3/movie/${movie_id}/videos?api_key=${process.env.REACT_APP_TMDB}&language=en-US`
+      let responseStatusCode = 444;
+      try {
+        const response = await axios.get(Movie_Video_API);
+        const data =  response && response.data;
+        responseStatusCode = response.status || 200
+        const videoKey = data.results[data.results.length - 1].key;
+        setVideoKey(videoKey)
+        setBannerVideo(`https://www.youtube.com/embed/${videoKey}`);
+      } catch (error) {
+        console.log(error.message)
+        responseStatusCode = error.status || 500
+      }
+      return { statusCode: responseStatusCode }
     }
-    return { statusCode: responseStatusCode }
   }
 
   useEffect(() => {
