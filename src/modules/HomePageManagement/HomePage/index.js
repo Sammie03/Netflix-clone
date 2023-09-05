@@ -22,7 +22,7 @@ import FullScreenPlayer from '../../../components/FullScreenPlayer';
 import axios from 'axios';
 import './style.scss'
 
-const HomePage = async () => {
+const HomePage = () => {
   const [profileName, setProfileName] = useState('');
   const [profileIcon, setProfileIcon] = useState('');
   const [bannerFilmIndex, setBannerFilmIndex] = useState(0);
@@ -32,18 +32,18 @@ const HomePage = async () => {
   const [volume, setVolume] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [showVolumeIcon, setShowVolumeIcon] = useState(false);
-  const bannerFilms = await useSelector(({ homePageFilms }) => homePageFilms.top10Movies && homePageFilms.top10Movies.results);
+  const bannerFilms = useSelector(({ homePageFilms }) => homePageFilms.top10Movies && homePageFilms.top10Movies.results);
 
   const generateBannerFilmIndex = () => {
     const random = Math.floor(Math.random() * (20 - 1) + 1);
     setBannerFilmIndex(random);
   }
 
- const getFilmVideo = async movie_id => {
+ const getFilmVideo = movie_id => {
       const Movie_Video_API = `https://api.themoviedb.org/3/movie/${movie_id}/videos?api_key=${process.env.REACT_APP_TMDB}&language=en-US`
       let responseStatusCode = 444;
       try {
-        const response = await axios.get(Movie_Video_API);
+        const response = axios.get(Movie_Video_API);
         const data =  response && response.data;
         responseStatusCode = response.status || 200
         const videoKey = data.results[data.results.length - 1].key;
