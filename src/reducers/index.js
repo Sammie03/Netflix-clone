@@ -27,6 +27,7 @@ export const homePageFilms = (state = INITIAL_STATE, action) => {
 
     switch (type) {
         case GET_ALL_TRENDING_FILMS:
+            console.log(payload, 'trending films payload')
             return {
                 ...state,
                 trendingFilms: payload
