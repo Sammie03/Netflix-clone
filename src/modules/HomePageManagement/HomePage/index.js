@@ -39,7 +39,7 @@ const HomePage = () => {
     setBannerFilmIndex(random);
   }
 
-  const getFilmVideo = async (movie_id) => {
+ const getFilmVideo = async movie_id => {
     if(movie_id !== undefined){
       const Movie_Video_API = `https://api.themoviedb.org/3/movie/${movie_id}/videos?api_key=${process.env.REACT_APP_TMDB}&language=en-US`
       let responseStatusCode = 444;
@@ -73,7 +73,7 @@ const HomePage = () => {
     const bannerVideoPlayer = setTimeout(() => {
       setPlayBannerVideo(true);
       getFilmVideo(bannerFilms && bannerFilms[bannerFilmIndex].id)
-    }, 3000);
+    }, 0);
   });
 
   const volumeHandler = () => {
