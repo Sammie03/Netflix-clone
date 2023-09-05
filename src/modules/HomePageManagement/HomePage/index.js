@@ -22,7 +22,7 @@ import FullScreenPlayer from '../../../components/FullScreenPlayer';
 import axios from 'axios';
 import './style.scss'
 
-const HomePage = () => {
+const HomePage = async () => {
   const [profileName, setProfileName] = useState('');
   const [profileIcon, setProfileIcon] = useState('');
   const [bannerFilmIndex, setBannerFilmIndex] = useState(0);
@@ -32,7 +32,7 @@ const HomePage = () => {
   const [volume, setVolume] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [showVolumeIcon, setShowVolumeIcon] = useState(false);
-  const bannerFilms = useSelector(({ homePageFilms }) => homePageFilms.top10Movies && homePageFilms.top10Movies.results);
+  const bannerFilms = await useSelector(({ homePageFilms }) => homePageFilms.top10Movies && homePageFilms.top10Movies.results);
 
   const generateBannerFilmIndex = () => {
     const random = Math.floor(Math.random() * (20 - 1) + 1);
@@ -71,7 +71,7 @@ const HomePage = () => {
     const bannerVideoPlayer = setTimeout(() => {
       setPlayBannerVideo(true);
       getFilmVideo(bannerFilms && bannerFilms[bannerFilmIndex].id)
-    }, 0);
+    }, 3000);
   });
 
   const volumeHandler = () => {
