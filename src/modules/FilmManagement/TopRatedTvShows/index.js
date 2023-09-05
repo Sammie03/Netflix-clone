@@ -18,7 +18,7 @@ const TopRatedTvShows = () => {
     useEffect(() => {
         const fetchTopRatedTvShows = async () => {
             try {
-                const response = await axios.get(TOP_RATED_TV_SHOWS_API);
+                const response = await axios.get(`https://api.themoviedb.org/3/tv/top_rated?api_key=${process.env.REACT_APP_TMDB}&language=en-US&page=1`);
                 const data =  response && response.data;
                 console.log(data, 'see top rated data')
                 dispatch(getTopRatedTvShows(data))
