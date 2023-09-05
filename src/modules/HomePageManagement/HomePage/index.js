@@ -40,7 +40,6 @@ const HomePage = () => {
   }
 
  const getFilmVideo = async movie_id => {
-    if(movie_id !== undefined){
       const Movie_Video_API = `https://api.themoviedb.org/3/movie/${movie_id}/videos?api_key=${process.env.REACT_APP_TMDB}&language=en-US`
       let responseStatusCode = 444;
       try {
@@ -55,7 +54,6 @@ const HomePage = () => {
         responseStatusCode = error.status || 500
       }
       return { statusCode: responseStatusCode }
-    }
   }
 
   useEffect(() => {
