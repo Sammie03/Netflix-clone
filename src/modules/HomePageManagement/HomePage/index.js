@@ -39,11 +39,11 @@ const HomePage = () => {
     setBannerFilmIndex(random);
   }
 
- const getFilmVideo = movie_id => {
+ const getFilmVideo = async movie_id => {
       const Movie_Video_API = `https://api.themoviedb.org/3/movie/${movie_id}/videos?api_key=${process.env.REACT_APP_TMDB}&language=en-US`
       let responseStatusCode = 444;
       try {
-        const response = axios.get(Movie_Video_API);
+        const response = await axios.get(Movie_Video_API);
         const data =  response && response.data;
         responseStatusCode = response.status || 200
         const videoKey = data.results[data.results.length - 1].key;
